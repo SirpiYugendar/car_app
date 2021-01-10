@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  runApp(RawApp());
+  runApp(RawApper());
 }
 
 class App extends StatelessWidget {
@@ -127,21 +127,32 @@ class MyButtonApp extends StatelessWidget {
     );
   }
 }
-
-class RawApp extends StatelessWidget {
-  const RawApp({Key key}) : super(key: key);
+/*
+! This is the sample code for RawMaterial Button.
+*/
+class RawApper extends StatelessWidget {
+  const RawApper({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-          body: Container(
-        child: RawMaterialButton(
-          constraints: BoxConstraints(minHeight: 50, minWidth: 70),
-          onPressed: () => {},
-          shape: CircleBorder(),
-          fillColor: Colors.green,
-          elevation: 3,
-        ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+          home: Scaffold(
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  RawMaterialButton(
+                    constraints: BoxConstraints(minHeight: 100, minWidth: 100),
+                    onPressed: () => {},
+                    shape: CircleBorder(),
+                    fillColor: Colors.green,
+                    elevation: 3,
+                    child: Text('Sirpi', style: GoogleFonts.pacifico().copyWith(fontSize: 30),),
+                  ),
+                ],
+              ),
+            ),
       ),
     );
   }
