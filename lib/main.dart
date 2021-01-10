@@ -43,7 +43,8 @@ class _MyAppState extends State<MyApp> {
   ];
   void _incrementCounter() {
     setState(() {
-      if (_index < textBlocks.length) _index++;
+      if (_index < textBlocks.length) 
+      _index++;
     });
   }
 
