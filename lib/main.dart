@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  runApp(MyButtonApp());
+  runApp(RawApp());
 }
 
 class App extends StatelessWidget {
@@ -43,8 +43,7 @@ class _MyAppState extends State<MyApp> {
   ];
   void _incrementCounter() {
     setState(() {
-      if (_index < textBlocks.length) 
-      _index++;
+      if (_index < textBlocks.length) _index++;
     });
   }
 
@@ -89,7 +88,10 @@ class MyButtonApp extends StatelessWidget {
                 'Outline Button',
                 style: GoogleFonts.pacifico(),
               ),
-              borderSide: BorderSide(color: Colors.red, width: 0.5,),
+              borderSide: BorderSide(
+                color: Colors.red,
+                width: 0.5,
+              ),
               splashColor: Colors.redAccent,
             ),
             FlatButton(
@@ -117,10 +119,28 @@ class MyButtonApp extends StatelessWidget {
               color: Colors.yellow,
             ),
             FloatingActionButton(
-              onPressed: () => [],
-              child: Text('Cls', style: GoogleFonts.pacifico())
-            )
+                onPressed: () => [],
+                child: Text('Cls', style: GoogleFonts.pacifico()))
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class RawApp extends StatelessWidget {
+  const RawApp({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+          body: Container(
+        child: RawMaterialButton(
+          constraints: BoxConstraints(minHeight: 50, minWidth: 70),
+          onPressed: () => {},
+          shape: CircleBorder(),
+          fillColor: Colors.green,
+          elevation: 3,
         ),
       ),
     );
