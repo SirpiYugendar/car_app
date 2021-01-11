@@ -127,6 +127,7 @@ class MyButtonApp extends StatelessWidget {
     );
   }
 }
+
 /*
 ! This is the sample code for RawMaterial Button.
 */
@@ -137,22 +138,25 @@ class RawApper extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-          home: Scaffold(
-            body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  RawMaterialButton(
-                    constraints: BoxConstraints(minHeight: 100, minWidth: 100),
-                    onPressed: () => {},
-                    shape: CircleBorder(),
-                    fillColor: Colors.green,
-                    elevation: 3,
-                    child: Text('Sirpi', style: GoogleFonts.pacifico().copyWith(fontSize: 30),),
-                  ),
-                ],
+      home: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              RawMaterialButton(
+                constraints: BoxConstraints(minHeight: 100, minWidth: 100),
+                onPressed: () => {},
+                shape: CircleBorder(),
+                fillColor: Colors.redAccent,
+                elevation: 3,
+                child: Text(
+                  'Sirpi',
+                  style: GoogleFonts.pacifico().copyWith(fontSize: 30),
+                ),
               ),
-            ),
+            ],
+          ),
+        ),
       ),
     );
   }
