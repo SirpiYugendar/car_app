@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  runApp(FlexApper());
+  runApp(ListApper());
 }
 
 class App extends StatelessWidget {
@@ -170,6 +170,7 @@ class FlexApper extends StatefulWidget {
 }
 
 class _FlexApperState extends State<FlexApper> {
+  Icon rotateIcon = Icon(Icons.rotate_right);
   List<MainAxisAlignment> _alignment = [
     MainAxisAlignment.start,
     MainAxisAlignment.end,
@@ -217,7 +218,7 @@ class _FlexApperState extends State<FlexApper> {
           ),
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.rotate_right),
+              icon: rotateIcon,
               tooltip: 'Direction',
               onPressed: () {
                 setState(() {
@@ -261,6 +262,43 @@ class _FlexApperState extends State<FlexApper> {
             blueButton
           ],
         )
+      ),
+    );
+  }
+}
+class ListApper extends StatelessWidget {
+  const ListApper({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+          home: Scaffold(
+        appBar: AppBar(
+          title: Center(child: Text('ListView', style: GoogleFonts.pacifico().copyWith(fontSize: 30),)),
+        ),
+            body: Container(
+          margin: EdgeInsets.symmetric(vertical: 20),
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: <Widget>[
+              Container(width: 150, color: Colors.redAccent,),
+              Container(width: 150, color: Colors.greenAccent,),
+              Container(width: 150, color: Colors.blueAccent,),
+              Container(width: 150, color: Colors.yellowAccent,),
+              Container(width: 150, color: Colors.purpleAccent,),
+              Container(width: 150, color: Colors.pinkAccent,),
+              Container(width: 150, color: Colors.black,),
+              Container(width: 150, color: Colors.redAccent,),
+              Container(width: 150, color: Colors.greenAccent,),
+              Container(width: 150, color: Colors.blueAccent,),
+              Container(width: 150, color: Colors.yellowAccent,),
+              Container(width: 150, color: Colors.purpleAccent,),
+              Container(width: 150, color: Colors.pinkAccent,),
+              Container(width: 150, color: Colors.black,),
+            ],
+          ),
+        ),
       ),
     );
   }
