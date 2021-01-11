@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  runApp(RawApper());
+  runApp(FlexApper());
 }
 
 class App extends StatelessWidget {
@@ -157,6 +157,110 @@ class RawApper extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class FlexApper extends StatefulWidget {
+  FlexApper({Key key}) : super(key: key);
+
+  @override
+  _FlexApperState createState() => _FlexApperState();
+}
+
+class _FlexApperState extends State<FlexApper> {
+  List<MainAxisAlignment> _alignment = [
+    MainAxisAlignment.start,
+    MainAxisAlignment.end,
+    MainAxisAlignment.center,
+    MainAxisAlignment.spaceAround,
+    MainAxisAlignment.spaceBetween,
+    MainAxisAlignment.spaceEvenly,
+  ];
+  List<String> _alignmentsText = [
+    'Start',
+    'End',
+    'Center',
+    'Space Around',
+    'Space Between',
+    'Space Evenly'
+  ];
+  bool _vertical = true;
+  int _alignmentIndex = 0;
+  RawMaterialButton redButton = RawMaterialButton(
+    onPressed: () => {},
+    elevation: 2,
+    fillColor: Colors.red,
+  );
+  RawMaterialButton greenButton = RawMaterialButton(
+    onPressed: () => {},
+    elevation: 2,
+    fillColor: Colors.green,
+  );
+  RawMaterialButton blueButton = RawMaterialButton(
+    onPressed: () => {},
+    elevation: 2,
+    fillColor: Colors.blue,
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(primarySwatch: Colors.red),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Flex',
+            style: GoogleFonts.pacifico().copyWith(fontSize: 30),
+          ),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.rotate_right),
+              tooltip: 'Direction',
+              onPressed: () {
+                setState(() {
+                  _vertical = !_vertical;
+                });
+              },
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 20),
+              child: Text(_vertical ? 'Vertical' : "Horizontal", style: GoogleFonts.pacifico(),),
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.aspect_ratio,
+              ),
+              tooltip: 'Main Axis',
+              onPressed: () {
+                setState(() {
+                  _alignmentIndex++;
+                  if (_alignmentIndex >= _alignment.length) {
+                    _alignmentIndex = 0;
+                  }
+                });
+              },
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 20),
+              child: Text(_alignmentsText[_alignmentIndex], style: GoogleFonts.pacifico(),),
+            ),
+            Padding(
+              padding: EdgeInsets.all(10),
+            ),
+          ],
+        ),
+        body: Flex(
+          direction: _vertical ? Axis.vertical : Axis.horizontal,
+          mainAxisAlignment: _alignment[_alignmentIndex],
+          children: <Widget>[
+            redButton,
+            greenButton,
+            blueButton
+          ],
+        )
       ),
     );
   }
