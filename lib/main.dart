@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  runApp(ListTileApper());
+  runApp(StackClass());
 }
 
 class App extends StatelessWidget {
@@ -460,6 +460,96 @@ class _ListTileApperState extends State<ListTileApper> {
                 ],
               )),
         ),
+      ),
+    );
+  }
+}
+
+class StackClass extends StatefulWidget {
+  StackClass({Key key}) : super(key: key);
+  final PleaseWaitWidget _pleaseWaitWidget =
+      PleaseWaitWidget(key: ObjectKey('pleaseWaitWidget'));
+  final AppWidget _appWidget = AppWidget(key: ObjectKey('appWidget'));
+  @override
+  _StackClassState createState() => _StackClassState();
+}
+
+class _StackClassState extends State<StackClass> {
+  bool _pleaseWaitValue = false;
+  
+  void _togglePleaseWait() {
+    setState(() {
+      _pleaseWaitValue = !_pleaseWaitValue;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> childWidget = _pleaseWaitValue
+        ? [widget._pleaseWaitWidget, widget._appWidget]
+        : [widget._appWidget];
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(title: Center(child: Text('StackApp', style: GoogleFonts.pacifico().copyWith(fontSize: 30),),)),
+        body: Center(
+          child: Stack(
+            key: ObjectKey('stack'),
+            children: childWidget,
+          ),
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: _togglePleaseWait,
+          label: Text('Please Wait on / off'),
+          icon: Icon(Icons.cached),
+        ),
+      ),
+    );
+  }
+}
+
+class PleaseWaitWidget extends StatelessWidget {
+  const PleaseWaitWidget({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
+        child: CircularProgressIndicator(
+          strokeWidth: 8,
+        ),
+      ),
+      color: Colors.grey.withOpacity(0.3),
+    );
+  }
+}
+
+class AppWidget extends StatelessWidget {
+  const AppWidget({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Text(
+            'Your',
+            style: GoogleFonts.pacifico().copyWith(fontSize: 20),
+          ),
+          Text(
+            'App',
+            style: GoogleFonts.pacifico().copyWith(fontSize: 20),
+          ),
+          Text(
+            'Goes',
+            style: GoogleFonts.pacifico().copyWith(fontSize: 20),
+          ),
+          Text(
+            'Here',
+            style: GoogleFonts.pacifico().copyWith(fontSize: 20),
+          ),
+        ],
       ),
     );
   }
