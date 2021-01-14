@@ -470,14 +470,21 @@ class StackClass extends StatefulWidget {
   final PleaseWaitWidget _pleaseWaitWidget =
       PleaseWaitWidget(key: ObjectKey('pleaseWaitWidget'));
   final AppWidget _appWidget = AppWidget(key: ObjectKey('appWidget'));
+  final ColorWidget _colorWidget = ColorWidget(
+    key: ObjectKey('colorWidget'),
+  );
   @override
   _StackClassState createState() => _StackClassState();
 }
 
 class _StackClassState extends State<StackClass> {
   bool _pleaseWaitValue = false;
-  
+
   void _togglePleaseWait() {
+    /*
+    ? set state notifies the framework that the internal state of the object state
+    ? is changed which schedules the build method for that current state.
+    */
     setState(() {
       _pleaseWaitValue = !_pleaseWaitValue;
     });
@@ -486,12 +493,19 @@ class _StackClassState extends State<StackClass> {
   @override
   Widget build(BuildContext context) {
     List<Widget> childWidget = _pleaseWaitValue
-        ? [widget._pleaseWaitWidget, widget._appWidget]
+        ? [widget._colorWidget, widget._pleaseWaitWidget]
         : [widget._appWidget];
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(title: Center(child: Text('StackApp', style: GoogleFonts.pacifico().copyWith(fontSize: 30),),)),
+        appBar: AppBar(
+          backgroundColor: Colors.black12,
+            title: Center(
+          child: Text(
+            'StackApp',
+            style: GoogleFonts.pacifico().copyWith(fontSize: 30, color: Colors.black),
+          ),
+        )),
         body: Center(
           child: Stack(
             key: ObjectKey('stack'),
@@ -500,8 +514,9 @@ class _StackClassState extends State<StackClass> {
         ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: _togglePleaseWait,
-          label: Text('Please Wait on / off'),
-          icon: Icon(Icons.cached),
+          backgroundColor: Colors.black12,
+          label: Text('Please Wait on / off', style: GoogleFonts.pacifico().copyWith(fontSize: 15, color: Colors.black),),
+          icon: Icon(Icons.cached, color: Colors.black),
         ),
       ),
     );
@@ -516,7 +531,8 @@ class PleaseWaitWidget extends StatelessWidget {
     return Container(
       child: Center(
         child: CircularProgressIndicator(
-          strokeWidth: 8,
+          strokeWidth: 5,
+          valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
         ),
       ),
       color: Colors.grey.withOpacity(0.3),
@@ -535,22 +551,33 @@ class AppWidget extends StatelessWidget {
         children: <Widget>[
           Text(
             'Your',
-            style: GoogleFonts.pacifico().copyWith(fontSize: 20),
+            style: GoogleFonts.pacifico().copyWith(fontSize: 20, color: Colors.greenAccent),
           ),
           Text(
             'App',
-            style: GoogleFonts.pacifico().copyWith(fontSize: 20),
+            style: GoogleFonts.pacifico().copyWith(fontSize: 20, color: Colors.greenAccent),
           ),
           Text(
             'Goes',
-            style: GoogleFonts.pacifico().copyWith(fontSize: 20),
+            style: GoogleFonts.pacifico().copyWith(fontSize: 20, color: Colors.greenAccent),
           ),
           Text(
             'Here',
-            style: GoogleFonts.pacifico().copyWith(fontSize: 20),
+            style: GoogleFonts.pacifico().copyWith(fontSize: 20, color: Colors.greenAccent),
           ),
         ],
       ),
+    );
+  }
+}
+
+class ColorWidget extends StatelessWidget {
+  const ColorWidget({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(child: Text('Sirpi', style: GoogleFonts.pacifico().copyWith(fontSize: 20, color: Colors.greenAccent),)),
     );
   }
 }
